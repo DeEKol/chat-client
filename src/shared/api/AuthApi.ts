@@ -12,8 +12,18 @@ export default class AuthApi {
         });
         const data = await response.json();
 
-        // console.log(data)
-        // localStorage.setItem("token", data.token)
+        return data;
+    }
+
+    static async checkAuth() {
+        const response = await fetch("http://127.0.0.1:7000/api/check", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        });
+        const data = await response.json();
 
         return data;
     }

@@ -1,6 +1,7 @@
 <script lang="ts">
     import UsersApi from "../../shared/api/UsersApi";
     import AuthApi from "../../shared/api/AuthApi";
+    import {userStore} from "../../app/providers/StoreProvider/store";
 
     let userId: number;
     let username: string;
@@ -35,7 +36,10 @@
             const data = await AuthApi.login(username, password);
 
             if (data) {
+                const id = data.user.id;
+                const username = data.user.username;
                 localStorage.setItem("token", data.token);
+                userStore.set({id, username});
             }
             console.log(data);
         }
@@ -52,6 +56,24 @@
 
     const onLogout = () => {
         AuthApi.logout();
+    }
+
+    const onCheckAuth = async () => {
+        try {
+            console.log("check");
+            // if (id) {
+            const user = await AuthApi.checkAuth();
+
+            console.log(user);
+
+            userStore.set(user[0]);
+        } catch (e) {
+            userStore.set({
+                id: undefined,
+                username: "",
+            });
+            console.warn(e);
+        }
     }
 </script>
 
@@ -94,6 +116,7 @@
         <button on:click={() => onLogin(username, password)}>Login</button>
     </form>
     <button on:click={() => onLogout()}>Logout</button>
+    <button on:click={() => onCheckAuth()}>Check Auth</button>
 </div>
 
 <style>

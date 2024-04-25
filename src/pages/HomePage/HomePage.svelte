@@ -5,21 +5,12 @@
     import RoomApi from "../../shared/api/RoomApi";
     import RoomPage from "../RoomPage/RoomPage.svelte";
 
-    let rooms = [];
+    let rooms: any[] = [];
 
     onMount(async () => {
       rooms = await RoomApi.getAllRooms();
     });
-
-    $: console.log(rooms)
 </script>
-
-<!--<div class="wrapper">-->
-<!--    <h1>Home Page</h1>-->
-<!--    <Users />-->
-<!--    <Rooms />-->
-<!--    <Messages />-->
-<!--</div>-->
 
 <div class="wrapper">
     <nav>
