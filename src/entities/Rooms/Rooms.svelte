@@ -6,15 +6,15 @@
     let name: string;
 
     const onGetAllRooms = async () => {
-        const users = await RoomApi.getAllRooms();
-        console.log(users);
+        const rooms = await RoomApi.getAllRooms();
+        console.log(rooms);
     }
 
     const onGetRoom = async (id: number) => {
         console.log(id);
         if (id) {
-            const user = await RoomApi.getRoom(id);
-            console.log(user);
+            const room = await RoomApi.getRoom(id);
+            console.log(room);
         }
     }
 
@@ -22,8 +22,8 @@
         console.log("create");
         console.log(name);
         if (name) {
-            const user = await RoomApi.createRoom(name);
-            console.log(user)
+            const room = await RoomApi.createRoom(name);
+            console.log(room)
         }
     }
 
@@ -32,8 +32,8 @@
         console.log(roomId);
         console.log(userId);
         if (roomId && userId) {
-            const users = await RoomApi.updateRoom(roomId, userId);
-            console.log(users)
+            const room = await RoomApi.updateRoom(roomId, userId);
+            console.log(room)
         }
     }
 
@@ -41,8 +41,8 @@
         console.log("delete");
         console.log(id);
         if (id) {
-            const user = await RoomApi.deleteRoom(id);
-            console.log(user)
+            const room = await RoomApi.deleteRoom(id);
+            console.log(room)
         }
     }
 
