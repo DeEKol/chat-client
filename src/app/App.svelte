@@ -6,25 +6,30 @@
   import {onMount} from "svelte";
 
   onMount(async () => {
-    try {
-      const user = await AuthApi.checkAuth();
-      userStore.set(user[0]);
-    } catch (e) {
-      userStore.set({
-        id: undefined,
-        username: "",
-      });
-    }
+      try {
+          const user = await AuthApi.checkAuth();
+          userStore.set(user[0]);
+      } catch (e) {
+          userStore.set({
+                id: undefined,
+              username: "",
+          });
+      }
   });
+
+  const onLogout = () => {
+      AuthApi.logout();
+  }
 </script>
 
 <main class="layout">
   <header>
     <h2>header</h2>
     {#if !!$userStore.id && !!$userStore.username}
-      <h4>id: {$userStore.id} username: {$userStore.username}</h4>
-      {:else}
-      <h4 class="red">Register Now!!!</h4>
+        <h4>id: {$userStore.id} username: {$userStore.username}</h4>
+        <button on:click={() => onLogout()}>Logout</button>
+        {:else}
+        <h4 class="red">Register Now!!!</h4>
     {/if}
   </header>
   {#if !!$userStore.id && !!$userStore.username}
@@ -37,13 +42,13 @@
 
 <style>
   .layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: inherit;
   }
 
   .red {
-    color: red;
+      color: red;
   }
 </style>

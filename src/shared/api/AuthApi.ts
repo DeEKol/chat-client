@@ -1,3 +1,5 @@
+import {userStore} from "../../app/providers/StoreProvider/store";
+
 export default class AuthApi {
     static async login(username: string, password: string) {
         const response = await fetch("http://127.0.0.1:7000/api/login", {
@@ -30,5 +32,9 @@ export default class AuthApi {
 
     static async logout() {
         localStorage.removeItem("token")
+        userStore.set({
+            id: undefined,
+            username: "",
+        })
     }
 }

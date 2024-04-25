@@ -19,7 +19,7 @@ export default class RoomApi {
         return data;
     }
 
-    static async createRoom(name: string) {
+    static async createRoom(name: string, userId: number) {
         const response = await fetch("http://127.0.0.1:7000/api/room", {
             method: "POST",
             headers: {
@@ -28,6 +28,7 @@ export default class RoomApi {
             },
             body: JSON.stringify({
                 name: name,
+                userId: userId,
             })
         });
         const data = await response.json();
