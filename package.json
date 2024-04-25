@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
+    "socket.io-client": "^4.7.5",
     "tinro": "^0.6.12"
   }
 }

@@ -9,6 +9,16 @@ export default class MessageApi {
         return data;
     }
 
+    static async getAllMessagesByRoom(roomId: number) {
+        const response = await fetch("http://127.0.0.1:7000/api/messagesByRoom/" + roomId, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            }
+        });
+        const data = await response.json();
+        return data;
+    }
+
     static async getMessage(id: number) {
         const response = await fetch("http://127.0.0.1:7000/api/message/" + id, {
             headers: {
