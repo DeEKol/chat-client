@@ -20,10 +20,8 @@
 
         setTimeout(() => {
             const el: HTMLElement | null = document.getElementById(foundObj.id);
-            el.scrollIntoView({behavior: "smooth", block: "center", inline: "start"})
+            el?.scrollIntoView({behavior: "smooth", block: "center", inline: "start"})
         }, 10)
-
-        console.log(foundObj)
     }
 </script>
 

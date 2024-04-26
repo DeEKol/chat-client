@@ -3,16 +3,14 @@
     import {io} from "socket.io-client";
     import {onMount} from "svelte";
     import MessageApi from "../../shared/api/MessageApi";
+    import AuthApi from "../../shared/api/AuthApi";
 
     export let room: any;
 
     let error = false;
     let imageUrl: any;
     let messageTextForFront: string = "";
-    let messageTextForBackArr: any[] = [
-        {text: "test message 1", room: 60, user: 1, time: '2024-04-25T12:10:25.017Z', id: 6},
-        {text: "test message 2", room: 60, user: 1, time: '2024-04-25T12:10:25.017Z', id: 6},
-    ];
+    let messageTextForBackArr: any[] = [];
 
     $: messageForFront = {
         text: messageTextForFront,
@@ -46,7 +44,8 @@
         }
     })
 
-    const onSendSocketMessage = (type: "text" | "img") => {
+    const onSendSocketMessage = async (type: "text" | "img") => {
+        await AuthApi.checkAuth();
         if ($messageStore.upd) {
             socket.emit('updMessageForFront', {id: $messageStore.upd, text: messageTextForFront, time: new Date()});
 

@@ -39,7 +39,7 @@
         {:else}
         <Auth />
     {/if}
-    <footer id="bottom">footer</footer>
+    <footer class="footer" id="bottom"></footer>
 </main>
 
 <style>
@@ -60,6 +60,9 @@
 
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+    .footer {
+        margin: 10px;
     }
 
     .red {

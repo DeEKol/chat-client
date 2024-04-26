@@ -9,6 +9,7 @@
 
     let rooms: any[] = [];
     let name: string;
+    let isError: boolean = false;
 
     onMount(async () => {
       rooms = await RoomApi.getAllRooms();
@@ -16,10 +17,20 @@
 
     const onCreateRoom = async (name: string) => {
         if (name) {
-            const room:any = await RoomApi.createRoom(name, $userStore.id);
+            try {
+                const room:any = await RoomApi.createRoom(name, $userStore.id);
 
-            rooms = [...rooms, room];
-            name = "";
+                rooms = [...rooms, room];
+            } catch (error) {
+                console.warn(error)
+
+                isError = true;
+                setTimeout(() => {
+                    isError = false;
+                }, 2000)
+            } finally {
+                name = "";
+            }
         }
     }
 
@@ -30,9 +41,9 @@
     <div class="nav-container">
         <h2>Navigation</h2>
         <nav class="nav">
-<!--            <a href="/">Home</a>-->
+            <a href="/">Home</a>
 <!--            <a href="/test">Test Page</a>-->
-            <a href="/users">Users Page</a>
+            <a href="/users">Find Users Page</a>
 
             <h4>Rooms</h4>
             {#if rooms}
@@ -45,7 +56,7 @@
             <label>
                 <input name="username" placeholder="room name" type="text" bind:value={name}>
             </label>
-            <button on:click={() => onCreateRoom(name)}>Create Room</button>
+            <button on:click={() => onCreateRoom(name)} class:error={isError}>Create Room</button>
         </form>
     </div>
 
@@ -85,5 +96,10 @@
         display: flex;
         flex-direction: column;
         align-items: end;
+        gap: 5px;
+    }
+    .error {
+        color: red;
+        pointer-events: none;
     }
 </style>

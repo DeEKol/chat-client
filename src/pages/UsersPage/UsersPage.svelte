@@ -7,12 +7,10 @@
     onMount(async () => {
         users = await UsersApi.getAllUsers();
     })
-
-    $: console.log(users);
 </script>
 
 <div class="wrapper">
-    <h1>Users Page</h1>
+    <h1>Find Users Page</h1>
     {#if users}
         <h3>User List</h3>
         {#each users as user}
