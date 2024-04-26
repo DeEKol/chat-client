@@ -4,11 +4,26 @@
     export let roomTitle: string;
     export let userId: number;
     export let room: any;
+    export let messagesArr: any;
+
+
+    let findMsg: string = "";
 
     const onUpdateRoom = async (roomId: number, userId: number) => {
         if (roomId && userId) {
             const roomUpd = await RoomApi.updateRoom(roomId, userId);
         }
+    }
+
+    const onFindMsg = () => {
+        const foundObj = messagesArr.find(obj => obj.text.includes(findMsg))
+
+        setTimeout(() => {
+            const el: HTMLElement | null = document.getElementById(foundObj.id);
+            el.scrollIntoView({behavior: "smooth", block: "center", inline: "start"})
+        }, 10)
+
+        console.log(foundObj)
     }
 </script>
 
@@ -26,6 +41,10 @@
         </label>
         <button on:click={() => onUpdateRoom(room.id, userId)}>Add User In Room</button>
     </form>
+    <div>
+        <input placeholder="Message" bind:value={findMsg}>
+        <button placeholder="Find msg" on:click={onFindMsg}>Find</button>
+    </div>
 </div>
 
 <style>
@@ -34,5 +53,10 @@
 
         padding: 7px;
         border-top-right-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 5px;
     }
 </style>

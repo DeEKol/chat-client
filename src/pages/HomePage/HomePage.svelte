@@ -30,14 +30,14 @@
     <div class="nav-container">
         <h2>Navigation</h2>
         <nav class="nav">
-            <a href="/">Home</a>
-            <a href="/test">Test Page</a>
+<!--            <a href="/">Home</a>-->
+<!--            <a href="/test">Test Page</a>-->
             <a href="/users">Users Page</a>
 
             <h4>Rooms</h4>
             {#if rooms}
-                {#each rooms as room}
-                    <a href={"/room/" + room.name}>Room: {room.name}</a>
+                {#each rooms.sort((a, b) => a.id > b.id ? 1 : -1) as room}
+                    <a href={"/room/" + room.name}>{room.name}</a>
                 {/each}
             {/if}
         </nav>

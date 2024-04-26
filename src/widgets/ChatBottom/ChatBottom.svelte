@@ -1,12 +1,8 @@
 <script lang="ts">
     import {messageStore, userStore} from "../../app/providers/StoreProvider/store";
-  import RoomApi from "../../shared/api/RoomApi";
-  import {io} from "socket.io-client";
-  import {onMount} from "svelte";
-  import AuthApi from "../../shared/api/AuthApi";
-  import MessageApi from "../../shared/api/MessageApi";
-  import ChatWindow from "../../widgets/ChatWindow/ChatWindow.svelte";
-  import ChatTop from "../../widgets/ChatTop/ChatTop.svelte";
+    import {io} from "socket.io-client";
+    import {onMount} from "svelte";
+    import MessageApi from "../../shared/api/MessageApi";
 
     export let room: any;
 
@@ -69,6 +65,8 @@
                 el.scrollIntoView({behavior: "smooth", block: "end", inline: "start"})
             }, 30)
         }
+
+        messageTextForFront = "";
     }
 
     // ! input img

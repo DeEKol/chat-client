@@ -24,10 +24,10 @@
                     </div>
                     <div class="text">{message.text}</div>
                     <div class="date">{new Date(message.time).toLocaleString('en-GB', { timeZone: 'UTC' })}</div>
-                    <div class="message-bottom">
-                        {#if message.user.id === $userStore.id}
-                        <button id={message.id} class="edit-btn" on:click={(event) => onEditBtn(event)}>edit</button>
-                            {/if}
+                    <div class="message-bottom" class:hide={message.user.id !== $userStore.id}>
+                        <!--{#if message.user.id === $userStore.id}-->
+                            <button id={message.id} class="edit-btn" on:click={(event) => onEditBtn(event)}>edit</button>
+                        <!--{/if}-->
                     </div>
                 </div>
             {:else if message.type === "img"}
@@ -100,9 +100,13 @@
     }
     .to-top {
         position: sticky;
-        width: 60px;
-        bottom: 10px;
-
+        width: 40px;
+        bottom: 80px;
         opacity: 0.3;
+    }
+    .hide {
+        opacity: 0;
+        pointer-events: none;
+        height: 0;
     }
 </style>

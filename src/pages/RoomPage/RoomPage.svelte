@@ -41,10 +41,10 @@
             }
         })
 
-        setTimeout(() => {
-            const el: HTMLElement | null = document.getElementById("bottom");
-            el.scrollIntoView(false)
-        }, 10)
+        // setTimeout(() => {
+        //     const el: HTMLElement | null = document.getElementById("bottom");
+        //     el.scrollIntoView(false)
+        // }, 10)
     });
 
     onMount(() => {
@@ -60,7 +60,7 @@
 
 <div class="wrapper">
     {#if isUserInRoom.includes(true)}
-        <ChatTop roomTitle={room.name} userId={userId} room={room} />
+        <ChatTop roomTitle={room.name} userId={userId} room={room} messagesArr={messageTextForBackArr} />
         <ChatWindow messagesArr={messageTextForBackArr} />
 
         <ChatBottom room={room} fileInput={fileInput} />

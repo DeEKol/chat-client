@@ -1,29 +1,29 @@
 <script lang="ts">
-  import HomePage from "../pages/HomePage/HomePage.svelte";
-  import {userStore} from "./providers/StoreProvider/store";
-  import Auth from "../features/Auth/Auth.svelte";
-  import AuthApi from "../shared/api/AuthApi.js";
-  import {onMount} from "svelte";
+    import HomePage from "../pages/HomePage/HomePage.svelte";
+    import {userStore} from "./providers/StoreProvider/store";
+    import Auth from "../features/Auth/Auth.svelte";
+    import AuthApi from "../shared/api/AuthApi.js";
+    import {onMount} from "svelte";
 
-  onMount(async () => {
-      try {
-          const user = await AuthApi.checkAuth();
-          userStore.set(user[0]);
-      } catch (e) {
-          userStore.set({
+    onMount(async () => {
+        try {
+            const user = await AuthApi.checkAuth();
+            userStore.set(user[0]);
+        } catch (e) {
+            userStore.set({
                 id: undefined,
-              username: "",
-          });
-      }
-  });
+                username: "",
+            });
+        }
+    });
 
-  const onLogout = () => {
-      AuthApi.logout();
-  }
+    const onLogout = () => {
+        AuthApi.logout();
+    }
 </script>
 
 <main class="layout">
-  <header class="header" id="top">
+    <header class="header" id="top">
     {#if !!$userStore.id && !!$userStore.username}
         <h4>id: {$userStore.id} username: {$userStore.username}</h4>
         <div>
@@ -33,36 +33,36 @@
         {:else}
         <h4 class="red">Register Now!!!</h4>
     {/if}
-  </header>
-  {#if !!$userStore.id && !!$userStore.username}
-    <HomePage />
-    {:else}
-    <Auth />
-  {/if}
-  <footer id="bottom">footer</footer>
+    </header>
+    {#if !!$userStore.id && !!$userStore.username}
+        <HomePage />
+        {:else}
+        <Auth />
+    {/if}
+    <footer id="bottom">footer</footer>
 </main>
 
 <style>
-  .layout {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: inherit;
-  }
-  .header {
-      padding: 10px;
-      margin-bottom: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: end;
+    .layout {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: inherit;
+    }
+    .header {
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
 
-      background: #19506c;
+        background: #19506c;
 
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-  }
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 
-  .red {
-      color: red;
-  }
+    .red {
+        color: red;
+    }
 </style>
