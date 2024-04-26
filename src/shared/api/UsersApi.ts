@@ -29,7 +29,7 @@ export default class UsersApi {
         const data = await response.json();
 
         console.log(data)
-        localStorage.setItem("token", data.token)
+        // localStorage.setItem("token", data.token)
 
         return data;
     }
