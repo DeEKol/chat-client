@@ -34,6 +34,8 @@
                 <img class="message-container" class:left={message.user.id !== $userStore.id} src={message.text} alt="img">
             {/if}
         {/each}
+        <!--        <button on:click={() => onToTop()} class="to-top">top</button>-->
+                <a class="to-top" href="#top">top</a>
     {/if}
 </div>
 
@@ -45,9 +47,6 @@
 
         background: #bdbcce;
         padding: 4px;
-        /*border-radius: 10px;*/
-
-        /*overflow: auto;*/
     }
     .message-container {
         display: flex;
@@ -90,6 +89,7 @@
     }
     .left {
         align-self: flex-start;
+        background: #a1a3d0;
     }
     .author {
       color: #4a50a6;
@@ -97,5 +97,12 @@
     .edit-btn {
         padding: 4px;
         font-size: 12px;
+    }
+    .to-top {
+        position: sticky;
+        width: 60px;
+        bottom: 10px;
+
+        opacity: 0.3;
     }
 </style>

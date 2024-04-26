@@ -23,10 +23,13 @@
 </script>
 
 <main class="layout">
-  <header class="header">
+  <header class="header" id="top">
     {#if !!$userStore.id && !!$userStore.username}
         <h4>id: {$userStore.id} username: {$userStore.username}</h4>
-        <button on:click={() => onLogout()}>Logout</button>
+        <div>
+            <button on:click={() => location.reload()}>Reload Page</button>
+            <button on:click={() => onLogout()}>Logout</button>
+        </div>
         {:else}
         <h4 class="red">Register Now!!!</h4>
     {/if}
@@ -36,7 +39,7 @@
     {:else}
     <Auth />
   {/if}
-  <footer>footer</footer>
+  <footer id="bottom">footer</footer>
 </main>
 
 <style>

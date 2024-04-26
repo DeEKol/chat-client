@@ -5,6 +5,7 @@
     import RoomApi from "../../shared/api/RoomApi";
     import RoomPage from "../RoomPage/RoomPage.svelte";
     import {userStore} from "../../app/providers/StoreProvider/store";
+    import UsersPage from "../UsersPage/UsersPage.svelte";
 
     let rooms: any[] = [];
     let name: string;
@@ -31,6 +32,7 @@
         <nav class="nav">
             <a href="/">Home</a>
             <a href="/test">Test Page</a>
+            <a href="/users">Users Page</a>
 
             <h4>Rooms</h4>
             {#if rooms}
@@ -50,6 +52,7 @@
     <div class="route-container">
         <Route path="/"><h1>Home page!!!</h1></Route>
         <Route path="/test"><TestPage /></Route>
+        <Route path="/users"><UsersPage /></Route>
 
         {#each reactiveRooms as room, index}
             <Route path={"/room/" + room.name}><RoomPage room={room} /></Route>
@@ -61,7 +64,7 @@
     .wrapper {
         flex-grow: 1;
         display: flex;
-        max-height: 1000px;
+        /*max-height: 1000px;*/
     }
     .nav-container {
         display: flex;

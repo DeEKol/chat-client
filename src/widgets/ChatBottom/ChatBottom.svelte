@@ -54,10 +54,20 @@
         if ($messageStore.upd) {
             socket.emit('updMessageForFront', {id: $messageStore.upd, text: messageTextForFront, time: new Date()});
 
+            setTimeout(() => {
+                const el: HTMLElement | null = document.getElementById($messageStore.upd);
+                el.scrollIntoView({behavior: "smooth", block: "center", inline: "start"})
+            }, 10)
         } else {
             const imgText = type === "img" ? imageUrl : messageTextForFront;
 
             socket.emit('newMessageForFront', {...messageForFront, type: type, text: imgText});
+
+            // ! scroll to bottom id
+            setTimeout(() => {
+                const el: HTMLElement | null = document.getElementById("bottom");
+                el.scrollIntoView({behavior: "smooth", block: "end", inline: "start"})
+            }, 30)
         }
     }
 
@@ -128,6 +138,9 @@
 
         padding: 7px;
         border-bottom-right-radius: 10px;
+
+        position: sticky;
+        bottom: 5px;
     }
     .message-area {
         display: flex;

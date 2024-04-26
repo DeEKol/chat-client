@@ -12,18 +12,7 @@
 
     let fileInput: any;
     let userId: number;
-    let messageTextForFront: string = "";
-    let messageTextForBackArr: any[] = [
-        {text: "test message 1", room: 60, user: 1, time: '2024-04-25T12:10:25.017Z', id: 6},
-        {text: "test message 2", room: 60, user: 1, time: '2024-04-25T12:10:25.017Z', id: 6},
-    ];
-
-    $: messageForFront = {
-        text: messageTextForFront,
-        roomId: room.id,
-        userId: $userStore.id,
-        time: new Date(),
-    }
+    let messageTextForBackArr: any[] = [];
 
     const socket = io("http://127.0.0.1:7000", {
         auth: {
@@ -51,6 +40,11 @@
                 messageTextForBackArr[index] = data;
             }
         })
+
+        setTimeout(() => {
+            const el: HTMLElement | null = document.getElementById("bottom");
+            el.scrollIntoView(false)
+        }, 10)
     });
 
     onMount(() => {
@@ -83,7 +77,8 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        overflow: auto;
+        /*overflow: auto;*/
+        position: relative;
     }
 
     .red {

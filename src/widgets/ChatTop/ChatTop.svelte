@@ -7,7 +7,7 @@
 
     const onUpdateRoom = async (roomId: number, userId: number) => {
         if (roomId && userId) {
-            const room = await RoomApi.updateRoom(roomId, userId);
+            const roomUpd = await RoomApi.updateRoom(roomId, userId);
         }
     }
 </script>
