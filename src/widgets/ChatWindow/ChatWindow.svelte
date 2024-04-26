@@ -6,11 +6,7 @@
     const onEditBtn = (event: any) => {
         const msgId = event.currentTarget.getAttribute("id");
         $messageStore.upd = Number(msgId);
-        console.log($messageStore.upd)
     }
-
-    $: console.log($messageStore.upd)
-    $: console.log(messagesArr)
 </script>
 
 <div class="wrapper">

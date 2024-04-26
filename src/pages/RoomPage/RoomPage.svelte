@@ -45,33 +45,17 @@
             messageTextForBackArr = [...messageTextForBackArr, data];
         })
         socket.on("updMessageForBack", async (data: any) => {
-            console.log("updMessageForBack");
-
             const index = messageTextForBackArr.findIndex(obj => obj.id === data.id);
 
             if (index != -1) {
                 messageTextForBackArr[index] = data;
             }
-
-            // console.log(data)
-            // messageTextForBackArr.map(obj => {
-            //     // console.log(obj)
-            //     if (obj.id === data.id) {
-            //         console.log(data.id)
-            //         return data;
-            //     }
-            //     return obj;
-            // })
-            // console.log(messageTextForBackArr);
-            // messageTextForBackArr = [...messageTextForBackArr, data];
         })
     });
 
     onMount(() => {
-        console.log("Mounting...")
         return () => {
             socket.emit('dis');
-            console.log("On destroy...");
         }
     })
 
@@ -82,10 +66,10 @@
 
 <div class="wrapper">
     {#if isUserInRoom.includes(true)}
-        <ChatTop roomTitle={room.name} />
+        <ChatTop roomTitle={room.name} userId={userId} room={room} />
         <ChatWindow messagesArr={messageTextForBackArr} />
 
-        <ChatBottom userId={userId} room={room} fileInput={fileInput} />
+        <ChatBottom room={room} fileInput={fileInput} />
         {:else}
         <h2 class="red">No room access!!!</h2>
     {/if}
@@ -94,6 +78,12 @@
 <style>
     .wrapper {
         flex-grow: 1;
+
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: auto;
     }
 
     .red {

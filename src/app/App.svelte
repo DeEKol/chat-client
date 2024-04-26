@@ -23,8 +23,7 @@
 </script>
 
 <main class="layout">
-  <header>
-    <h2>header</h2>
+  <header class="header">
     {#if !!$userStore.id && !!$userStore.username}
         <h4>id: {$userStore.id} username: {$userStore.username}</h4>
         <button on:click={() => onLogout()}>Logout</button>
@@ -46,6 +45,18 @@
       flex-direction: column;
       justify-content: space-between;
       min-height: inherit;
+  }
+  .header {
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+
+      background: #19506c;
+
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
   }
 
   .red {

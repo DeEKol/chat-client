@@ -23,54 +23,64 @@
     }
 
     $: reactiveRooms = rooms;
-
-    $: console.log(rooms)
-    $: console.log(reactiveRooms)
 </script>
 
 <div class="wrapper">
-    <nav>
-        <a href="/">Home</a>
-<!--        <a href="/portfolio">Portfolio</a>-->
-        <a href="/test">Test Page</a>
+    <div class="nav-container">
+        <h2>Navigation</h2>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/test">Test Page</a>
 
-        {#if rooms}
-            {#each rooms as room}
-                <a href={"/room/" + room.name}>Room: {room.name}</a>
-            {/each}
-        {/if}
-    </nav>
+            <h4>Rooms</h4>
+            {#if rooms}
+                {#each rooms as room}
+                    <a href={"/room/" + room.name}>Room: {room.name}</a>
+                {/each}
+            {/if}
+        </nav>
+        <form class="create-room" on:submit|preventDefault method="post">
+            <label>
+                <input name="username" placeholder="room name" type="text" bind:value={name}>
+            </label>
+            <button on:click={() => onCreateRoom(name)}>Create Room</button>
+        </form>
+    </div>
 
-    <Route path="/"><h1>This is the main page</h1></Route>
-<!--    <Route path="/portfolio/*">-->
-<!--        <Route path="/">-->
-<!--            <h1>Portfolio introduction</h1>-->
-<!--            <nav>-->
-<!--                <a href="/portfolio/sites">Sites</a>-->
-<!--                <a href="/portfolio/photos">Photos</a>-->
-<!--            </nav>-->
-<!--        </Route>-->
-<!--        <Route path="/sites"><h1>Portfolio: Sites</h1></Route>-->
-<!--        <Route path="/photos"><h1>Portfolio: Photos</h1></Route>-->
-<!--    </Route>-->
-    <Route path="/test"><TestPage /></Route>
+    <div class="route-container">
+        <Route path="/"><h1>Home page!!!</h1></Route>
+        <Route path="/test"><TestPage /></Route>
 
-    {#each reactiveRooms as room, index}
-        <!--{#if room.users.map((user) => user.id === $userStore.id)}-->
+        {#each reactiveRooms as room, index}
             <Route path={"/room/" + room.name}><RoomPage room={room} /></Route>
-        <!--{/if}-->
-    {/each}
-    <form on:submit|preventDefault method="post">
-        <label>
-            room name
-            <input name="username" type="text" bind:value={name}>
-        </label>
-        <button on:click={() => onCreateRoom(name)}>Create Room</button>
-    </form>
+        {/each}
+    </div>
 </div>
 
 <style>
     .wrapper {
         flex-grow: 1;
+        display: flex;
+        max-height: 1000px;
+    }
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        padding: 20px;
+
+        background: #58718c;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    .nav {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+    .create-room {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
     }
 </style>

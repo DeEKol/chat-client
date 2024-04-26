@@ -12,10 +12,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+input {
+  max-width: 90px;
+}
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #242baf;
   text-decoration: inherit;
 }
 a:hover {
@@ -72,7 +75,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #2029ce;
   }
   button {
     background-color: #f9f9f9;
