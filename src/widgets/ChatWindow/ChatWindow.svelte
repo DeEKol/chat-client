@@ -1,9 +1,15 @@
 <script lang="ts">
-    import {userStore} from "../../app/providers/StoreProvider/store.js";
+    import {messageStore, userStore} from "../../app/providers/StoreProvider/store.js";
 
-    export let messagesArr;
+    export let messagesArr: any;
 
-    console.log($userStore.id)
+    const onEditBtn = (event: any) => {
+        const msgId = event.currentTarget.getAttribute("id");
+        $messageStore.upd = Number(msgId);
+        console.log($messageStore.upd)
+    }
+
+    $: console.log($messageStore.upd)
     $: console.log(messagesArr)
 </script>
 
@@ -11,7 +17,7 @@
     {#if messagesArr}
         {#each messagesArr as message}
             {#if message.type === "text"}
-                <div class="message-container" class:left={message.user.id !== $userStore.id}>
+                <div class="message-container" class:left={message.user.id !== $userStore.id} class:edit={$messageStore.upd === message.id}>
                     <div class="message-top">
                         {#if message.user.id !== $userStore.id}
                             <div class="author">{message.user.username}</div>
@@ -24,7 +30,7 @@
                     <div class="date">{new Date(message.time).toLocaleString('en-GB', { timeZone: 'UTC' })}</div>
                     <div class="message-bottom">
                         {#if message.user.id === $userStore.id}
-                        <button id={message.id} class="edit-btn" on:click={(event) => console.log(event.currentTarget.getAttribute("id"))}>edit</button>
+                        <button id={message.id} class="edit-btn" on:click={(event) => onEditBtn(event)}>edit</button>
                             {/if}
                     </div>
                 </div>
@@ -61,6 +67,9 @@
         border-radius: 10px;
 
         margin-bottom: 5px;
+    }
+    .edit {
+        background: rgba(0, 0, 0, 0.5);
     }
     .text {
       /*font-size: 10px;*/

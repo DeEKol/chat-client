@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {userStore} from "../../app/providers/StoreProvider/store";
+    import {messageStore, userStore} from "../../app/providers/StoreProvider/store";
   import RoomApi from "../../shared/api/RoomApi";
   import {io} from "socket.io-client";
   import {onMount} from "svelte";
@@ -10,6 +10,7 @@
 
   export let room: any;
 
+  let updMessage: number;
   let imageUrl: any;
   let messageTextForFront: string = "";
   let messageTextForBackArr: any[] = [
@@ -62,9 +63,14 @@
   })
 
   const onSendSocketMessage = (type: "text" | "img") => {
-    console.log("onSendSocketMessage");
-    const imgText = type === "img" ? imageUrl : messageTextForFront;
-    socket.emit('newMessageForFront', {...messageForFront, type: type, text: imgText});
+      if ($messageStore.upd) {
+          socket.emit('updMessageForFront', {id: $messageStore.upd, text: messageTextForFront, time: new Date()});
+
+      } else {
+          console.log("onSendSocketMessage");
+          const imgText = type === "img" ? imageUrl : messageTextForFront;
+          socket.emit('newMessageForFront', {...messageForFront, type: type, text: imgText});
+      }
   }
 
   export let userId: number;
@@ -111,7 +117,7 @@
   }
   // ! input img end
 
-  $: console.log(error)
+  $: console.log(updMessage)
 
 </script>
 <div class="wrapper">
@@ -124,7 +130,10 @@
         </div>
         <!-- ! input img end-->
         <textarea class="textarea" class:error bind:value={messageTextForFront} />
-        <button on:click={() => onSendSocketMessage("text")}>Send</button>
+        {#if $messageStore.upd}
+            <button on:click={() => $messageStore.upd = null}>Cancel upd</button>
+        {/if}
+        <button on:click={() => onSendSocketMessage("text")}>{$messageStore.upd ? "Upd" : "Send"}</button>
     </div>
 
     <form on:submit|preventDefault method="post">

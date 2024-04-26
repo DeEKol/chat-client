@@ -5,7 +5,15 @@ type TUser = {
     username: string;
 }
 
+type TMessage = {
+    upd: number | undefined | null;
+}
+
 export const userStore = writable<TUser>({
     id: undefined,
     username: "",
+});
+
+export const messageStore = writable<TMessage>({
+    upd: undefined,
 });

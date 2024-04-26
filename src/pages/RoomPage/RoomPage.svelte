@@ -6,6 +6,7 @@
     import ChatWindow from "../../widgets/ChatWindow/ChatWindow.svelte";
     import ChatTop from "../../widgets/ChatTop/ChatTop.svelte";
     import ChatBottom from "../../widgets/ChatBottom/ChatBottom.svelte";
+    import RoomApi from "../../shared/api/RoomApi";
 
     export let room: any;
 
@@ -32,15 +33,37 @@
     });
 
     onMount(async () => {
+        const roomUpd = await RoomApi.getUserInRoom(room.id);
+        room = roomUpd[0];
+
         const messageFromBackGet = await MessageApi.getAllMessagesByRoom(room.id);
 
         messageTextForBackArr = [...messageTextForBackArr, ...messageFromBackGet]
         messageTextForBackArr.sort((a, b) => a.id > b.id ? 1 : -1);
 
         socket.on("newMessageForBack", async (data: any) => {
-            console.log("newMessageForBack", data)
-            console.log(data)
             messageTextForBackArr = [...messageTextForBackArr, data];
+        })
+        socket.on("updMessageForBack", async (data: any) => {
+            console.log("updMessageForBack");
+
+            const index = messageTextForBackArr.findIndex(obj => obj.id === data.id);
+
+            if (index != -1) {
+                messageTextForBackArr[index] = data;
+            }
+
+            // console.log(data)
+            // messageTextForBackArr.map(obj => {
+            //     // console.log(obj)
+            //     if (obj.id === data.id) {
+            //         console.log(data.id)
+            //         return data;
+            //     }
+            //     return obj;
+            // })
+            // console.log(messageTextForBackArr);
+            // messageTextForBackArr = [...messageTextForBackArr, data];
         })
     });
 
