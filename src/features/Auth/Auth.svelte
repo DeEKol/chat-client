@@ -26,6 +26,7 @@
                 const username = data.user.username;
                 localStorage.setItem("token", data.token);
                 userStore.set({id, username});
+                location. reload();
             }
             console.log(data);
         }

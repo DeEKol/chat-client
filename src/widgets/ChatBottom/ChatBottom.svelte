@@ -82,6 +82,7 @@
   }
 
 
+  let error = false;
   // ! input img
   function handleFileChange(event) {
     const file = event.target.files[0];
@@ -92,28 +93,37 @@
       onSendSocketMessage("img");
     };
 
-    if (file) {
+    if (file && file.size < 1048576) {
       reader.readAsDataURL(file);
+    } else {
+        error = true;
+        setTimeout(() => {
+            error = false;
+        }, 3000)
+        console.warn("Select a file less than 1mb");
     }
   }
 
-  export let fileInput;
+  export let fileInput: any;
 
   const handleButtonClick = () => {
     fileInput.click();
   }
   // ! input img end
 
-  $: console.log(messageTextForBackArr)
+  $: console.log(error)
 
 </script>
 <div class="wrapper">
     <div class="message-area">
         <!-- ! input img-->
         <input type="file" bind:this={fileInput} hidden="true" on:change={handleFileChange}>
-        <button on:click={handleButtonClick}>Add Image</button>
+        <div class="btn-wrapper">
+            <div class="error-img" class:error={error}>Select a file less than 1mb</div>
+            <button on:click={handleButtonClick}>Add Image</button>
+        </div>
         <!-- ! input img end-->
-        <textarea class="textarea" type="text" bind:value={messageTextForFront} />
+        <textarea class="textarea" class:error bind:value={messageTextForFront} />
         <button on:click={() => onSendSocketMessage("text")}>Send</button>
     </div>
 
@@ -126,23 +136,39 @@
     </form>
 </div>
 <style>
-  .wrapper {
-    /*flex-grow: 1;*/
-    background: #58718c;
+    .btn-wrapper {
+        position: relative;
+    }
+    .error-img {
+        color: red;
+        position: absolute;
+        right: 0;
+        bottom: 10%;
+        display: none;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+    }
+    .error {
+        display: block;
+    }
+    .wrapper {
+        /*flex-grow: 1;*/
+        background: #58718c;
 
-    padding: 7px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  .message-area {
-    display: flex;
-    justify-content: space-between;
-  }
-  .textarea {
-    resize: none;
-  }
+        padding: 7px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .message-area {
+        display: flex;
+        justify-content: space-between;
+    }
+    .textarea {
+        resize: none;
+    }
 
-  .red {
-    color: red;
-  }
+    .red {
+        color: red;
+    }
 </style>

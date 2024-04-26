@@ -9,7 +9,7 @@
 
     export let room: any;
 
-    let fileInput;
+    let fileInput: any;
     let userId: number;
     let messageTextForFront: string = "";
     let messageTextForBackArr: any[] = [
