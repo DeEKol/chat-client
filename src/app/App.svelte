@@ -1,10 +1,11 @@
 <script lang="ts">
-    import HomePage from "../pages/HomePage/HomePage.svelte";
+    import HomePage from "../pages/HomePage/ui/HomePage.svelte";
     import {userStore} from "./providers/StoreProvider/store";
     import Auth from "../features/Auth/Auth.svelte";
     import AuthApi from "../shared/api/AuthApi.js";
     import {onMount} from "svelte";
     import Header from "../widgets/Header";
+    import RoutesProvider from "./providers/RoutesProvider/ui/RoutesProvider.svelte";
 
     onMount(async () => {
         try {
@@ -26,7 +27,8 @@
 <main class="layout">
     <Header id={$userStore.id} username={$userStore.username} />
     {#if !!$userStore.id && !!$userStore.username}
-        <HomePage />
+<!--        <HomePage />-->
+        <RoutesProvider />
         {:else}
         <Auth />
     {/if}

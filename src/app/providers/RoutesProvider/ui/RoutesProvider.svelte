@@ -1,11 +1,14 @@
 <script lang="ts">
     import {Route} from 'tinro';
-    import TestPage from "../TestPage/TestPage.svelte";
     import {onMount} from "svelte";
-    import RoomApi from "../../shared/api/RoomApi";
-    import RoomPage from "../RoomPage/RoomPage.svelte";
-    import {userStore} from "../../app/providers/StoreProvider/store";
-    import UsersPage from "../UsersPage/UsersPage.svelte";
+
+    import RoomApi from "../../../../shared/api/RoomApi";
+    import {userStore} from "../../StoreProvider/store";
+
+    import RoomPage from "../../../../pages/RoomPage/RoomPage.svelte";
+    import UsersPage from "../../../../pages/UsersPage/UsersPage.svelte";
+    import TestPage from "../../../../pages/TestPage/TestPage.svelte";
+    import HomePage from "../../../../pages/HomePage";
 
     let rooms: any[] = [];
     let name: string;
@@ -37,7 +40,7 @@
     $: reactiveRooms = rooms;
 </script>
 
-<div class="wrapper">
+<main class="wrapper">
     <div class="nav-container">
         <h2>Navigation</h2>
         <nav class="nav">
@@ -61,7 +64,7 @@
     </div>
 
     <div class="route-container">
-        <Route path="/"><h1>Home page!!!</h1></Route>
+        <Route path="/"><HomePage /></Route>
         <Route path="/test"><TestPage /></Route>
         <Route path="/users"><UsersPage /></Route>
 
@@ -69,7 +72,7 @@
             <Route path={"/room/" + room.name}><RoomPage room={room} /></Route>
         {/each}
     </div>
-</div>
+</main>
 
 <style>
     .wrapper {
