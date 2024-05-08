@@ -33,7 +33,7 @@
     }
 </script>
 
-<div class="wrapper">
+<main class="wrapper">
     <h4>Auth</h4>
     <form on:submit|preventDefault method="post">
         <label>
@@ -47,7 +47,7 @@
         <button on:click={() => onLogin(username, password)}>Sign in</button>
         <button on:click={() => onCreateUser(username, password)}>Sign up</button>
     </form>
-</div>
+</main>
 
 <style>
     .wrapper {
