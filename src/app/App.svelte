@@ -24,7 +24,7 @@
     }
 </script>
 
-<main class="layout">
+<div class="layout">
     <Header id={$userStore.id} username={$userStore.username} />
     {#if !!$userStore.id && !!$userStore.username}
 <!--        <HomePage />-->
@@ -33,7 +33,7 @@
         <Auth />
     {/if}
     <footer class="footer" id="bottom"></footer>
-</main>
+</div>
 
 <style>
     .layout {
