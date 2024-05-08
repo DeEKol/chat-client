@@ -4,6 +4,7 @@
     import Auth from "../features/Auth/Auth.svelte";
     import AuthApi from "../shared/api/AuthApi.js";
     import {onMount} from "svelte";
+    import Header from "../widgets/Header";
 
     onMount(async () => {
         try {
@@ -23,17 +24,7 @@
 </script>
 
 <main class="layout">
-    <header class="header" id="top">
-    {#if !!$userStore.id && !!$userStore.username}
-        <h4>id: {$userStore.id} username: {$userStore.username}</h4>
-        <div>
-            <button on:click={() => location.reload()}>Reload Page</button>
-            <button on:click={() => onLogout()}>Logout</button>
-        </div>
-        {:else}
-        <h4 class="red">Register Now!!!</h4>
-    {/if}
-    </header>
+    <Header id={$userStore.id} username={$userStore.username} />
     {#if !!$userStore.id && !!$userStore.username}
         <HomePage />
         {:else}
