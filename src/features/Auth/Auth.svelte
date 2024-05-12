@@ -34,7 +34,7 @@
 </script>
 
 <main class="wrapper">
-    <h4>Auth</h4>
+    <h4 class="title">Auth</h4>
     <form on:submit|preventDefault method="post">
         <label>
             username

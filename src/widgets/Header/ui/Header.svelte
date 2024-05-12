@@ -1,5 +1,6 @@
 <script lang="ts">
     import AuthApi from "../../../shared/api/AuthApi";
+    import TitleUI from "../../../shared/ui";
 
     export let id: number;
     export let username: string;
@@ -18,6 +19,9 @@
         </div>
     {:else}
         <h4 class="red">Register Now!!!</h4>
+        <TitleUI classExtend="title" priority={1} size="X">
+            Register Now!!!
+        </TitleUI>
     {/if}
 </header>
 
@@ -33,5 +37,9 @@
 
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+
+    .header :global(.title) {
+        color: red;
     }
 </style>
