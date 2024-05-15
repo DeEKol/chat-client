@@ -19,7 +19,7 @@
         </div>
     {:else}
         <h4 class="red">Register Now!!!</h4>
-        <TitleUI classExtend="title" priority={1} size="X">
+        <TitleUI classExtend="title" level={2} size="L">
             Register Now!!!
         </TitleUI>
     {/if}
