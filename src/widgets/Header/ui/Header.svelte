@@ -1,7 +1,7 @@
 <script lang="ts">
-    import AuthApi from "../../../shared/api/AuthApi";
-    import { TitleUI } from "../../../shared/ui";
-    import type { TSizeProp } from "../../../shared/ui";
+    import AuthApi from "@shared/api/AuthApi";
+    import {TitleUI} from "@shared/ui";
+    import type { TSizeProp } from "@shared/ui";
 
     export let id: number;
     export let username: string;
