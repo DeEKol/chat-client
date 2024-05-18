@@ -10,7 +10,7 @@
 
 <DynamicTitle
         {levelProp}
-        classes={classNames("title-ui", {"green": true}, [classExtendProp, sizeProp])}
+        classes={classNames("title-ui", {"active": true}, [classExtendProp, sizeProp])}
 >
     <slot />
 </DynamicTitle>
@@ -18,8 +18,8 @@
 <style>
     /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
     /* extend - взят из родительского компонента */
-    /* Порядок: @layer base, adds, mods, extend; */
-    @layer base, adds, mods, extend;
+    /* Порядок: @layer global, base, adds, mods, extend; */
+    @layer global, base, adds, mods, extend;
 
     @layer base {
         :global(.title-ui) {
@@ -48,8 +48,8 @@
         }
     }
     @layer mods {
-        :global(.title-ui.green) {
-            color: green;
+        :global(.title-ui.active) {
+            /*color: green;*/
         }
     }
 </style>

@@ -17,13 +17,12 @@
 
 <header class="header" id="top">
     {#if !!id && !!username}
-        <h4>id: {id} username: {username}</h4>
+        <TitleUI classExtendProp="header__title-ui" levelProp={3} {sizeProp}>id: {id} username: {username}</TitleUI>
         <div>
             <button on:click={() => location.reload()}>Reload Page</button>
             <button on:click={() => onLogout()}>Logout</button>
         </div>
     {:else}
-        <h4 class="red">Register Now!!!</h4>
         <TitleUI classExtendProp="header__title-ui" levelProp={3} {sizeProp}>
             Register Now!!!
         </TitleUI>
@@ -49,7 +48,8 @@
     /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
     @layer extend {
         .header :global(.header__title-ui) {
-            color: red;
+            /*color: red;*/
+            margin-bottom: 10px;
         }
     }
 </style>
