@@ -15,7 +15,7 @@
     <slot />
 </DynamicTitle>
 
-<style>
+<style lang="scss">
     /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
     /* extend - взят из родительского компонента */
     /* Порядок: @layer global, base, adds, mods, extend; */
