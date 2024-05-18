@@ -11,7 +11,6 @@
 <DynamicTitle
         {levelProp}
         classes={classNames("title-ui", {"green": true}, [classExtendProp, sizeProp])}
-        style="--ext: {classExtendProp}"
 >
     <slot />
 </DynamicTitle>
