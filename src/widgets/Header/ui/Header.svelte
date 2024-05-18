@@ -1,6 +1,6 @@
 <script lang="ts">
     import AuthApi from "../../../shared/api/AuthApi";
-    import TitleUI from "../../../shared/ui";
+    import { TitleUI, TSizeProp } from "../../../shared/ui";
 
     export let id: number;
     export let username: string;
@@ -8,6 +8,10 @@
     const onLogout = () => {
         AuthApi.logout();
     }
+
+    /* ? Props */
+    /* По возможности типизируем пропсы */
+    const sizeProp: TSizeProp = "M";
 </script>
 
 <header class="header" id="top">
@@ -19,13 +23,14 @@
         </div>
     {:else}
         <h4 class="red">Register Now!!!</h4>
-        <TitleUI classExtend="title" level={2} size="L">
+        <TitleUI classExtendProp="header__title-ui" levelProp={3} {sizeProp}>
             Register Now!!!
         </TitleUI>
     {/if}
 </header>
 
 <style>
+    /* ? Component styles */
     .header {
         padding: 10px;
         margin-bottom: 10px;
@@ -39,7 +44,11 @@
         border-bottom-right-radius: 10px;
     }
 
-    .header :global(.title) {
-        color: red;
+    /* ? Prop styles */
+    /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
+    @layer extend {
+        .header :global(.header__title-ui) {
+            color: red;
+        }
     }
 </style>
