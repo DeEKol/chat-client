@@ -1,5 +1,5 @@
 <script lang="ts">
-    import RoomApi from "../../shared/api/RoomApi";
+    import RoomApi from "@shared/api/RoomApi";
 
     export let roomTitle: string;
     export let userId: number;

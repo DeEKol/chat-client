@@ -1,12 +1,13 @@
 <script lang="ts">
-    import {userStore} from "../../app/providers/StoreProvider/store";
     import {io} from "socket.io-client";
     import {onMount} from "svelte";
-    import MessageApi from "../../shared/api/MessageApi";
-    import ChatWindow from "../../widgets/ChatWindow/ChatWindow.svelte";
-    import ChatTop from "../../widgets/ChatTop/ChatTop.svelte";
-    import ChatBottom from "../../widgets/ChatBottom/ChatBottom.svelte";
-    import RoomApi from "../../shared/api/RoomApi";
+
+    import { userStore } from "@app/providers/StoreProvider/store";
+    import ChatWindow from "@widgets/ChatWindow/ChatWindow.svelte";
+    import ChatTop from "@widgets/ChatTop/ChatTop.svelte";
+    import ChatBottom from "@widgets/ChatBottom/ChatBottom.svelte";
+    import MessageApi from "@shared/api/MessageApi";
+    import RoomApi from "@shared/api/RoomApi";
 
     export let room: any;
 

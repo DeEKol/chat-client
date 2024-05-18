@@ -1,9 +1,10 @@
 <script lang="ts">
-    import {messageStore, userStore} from "../../app/providers/StoreProvider/store";
-    import {io} from "socket.io-client";
-    import {onMount} from "svelte";
-    import MessageApi from "../../shared/api/MessageApi";
-    import AuthApi from "../../shared/api/AuthApi";
+    import { onMount } from "svelte";
+    import { io } from "socket.io-client";
+
+    import {messageStore, userStore} from "@app/providers/StoreProvider/store";
+    import MessageApi from "@shared/api/MessageApi";
+    import AuthApi from "@shared/api/AuthApi";
 
     export let room: any;
 

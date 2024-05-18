@@ -1,6 +1,7 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import UsersApi from "../../shared/api/UsersApi";
+
+    import UsersApi from "@shared/api/UsersApi";
 
     let users: any;
 

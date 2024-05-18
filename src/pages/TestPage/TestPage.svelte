@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Rooms from "../../entities/Rooms/Rooms.svelte";
-    import Messages from "../../entities/Messages/Messages.svelte";
-    import Users from "../../entities/Users/Users.svelte";
+    import Rooms from "@entities/Rooms/Rooms.svelte";
+    import Messages from "@entities/Messages/Messages.svelte";
+    import Users from "@entities/Users/Users.svelte";
 
 </script>
 

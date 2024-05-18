@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {messageStore, userStore} from "../../app/providers/StoreProvider/store.js";
+    import { messageStore, userStore } from "@app/providers/StoreProvider/store.js";
 
     export let messagesArr: any;
 
