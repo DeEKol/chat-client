@@ -61,7 +61,6 @@
 <!--            <a href="/test">Test Page</a>-->
             <a href="/users">Find Users Page</a>
 
-            <h4>Rooms</h4>
             <TitleUI
                     classExtendProp="router-provider__title-ui-two"
                     levelProp={4}
