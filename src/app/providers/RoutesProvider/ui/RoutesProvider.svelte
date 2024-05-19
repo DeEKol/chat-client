@@ -2,11 +2,7 @@
     import {onMount} from "svelte";
     import {Route} from 'tinro';
 
-
-    import RoomPage from "@pages/RoomPage/RoomPage.svelte";
-    import UsersPage from "@pages/UsersPage/UsersPage.svelte";
-    import TestPage from "@pages/TestPage/TestPage.svelte";
-    import HomePage from "@pages/HomePage";
+    import { HomePage, TestPage, UsersPage, RoomPage } from "@pages/index";
     import RoomApi from "@shared/api/RoomApi";
     import { TitleUI } from "@shared/ui";
     import type { TSizeProp } from "@shared/ui";

@@ -3,9 +3,9 @@
     import {onMount} from "svelte";
 
     import { userStore } from "@app/providers/StoreProvider/store";
-    import ChatWindow from "@widgets/ChatWindow/ChatWindow.svelte";
-    import ChatTop from "@widgets/ChatTop/ChatTop.svelte";
-    import ChatBottom from "@widgets/ChatBottom/ChatBottom.svelte";
+    import ChatWindow from "@widgets/ChatWindow";
+    import ChatTop from "@widgets/ChatTop";
+    import ChatBottom from "@widgets/ChatBottom";
     import MessageApi from "@shared/api/MessageApi";
     import RoomApi from "@shared/api/RoomApi";
     import { TitleUI } from "@shared/ui";

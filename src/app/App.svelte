@@ -2,7 +2,7 @@
     import {onMount} from "svelte";
 
     import Header from "@widgets/Header";
-    import Auth from "@features/Auth/Auth.svelte";
+    import Auth from "@features/Auth";
     import AuthApi from "@shared/api/AuthApi.js";
     import RoutesProvider from "./providers/RoutesProvider/ui/RoutesProvider.svelte";
     import { userStore } from "./providers/StoreProvider/store";

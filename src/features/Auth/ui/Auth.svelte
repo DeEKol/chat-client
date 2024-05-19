@@ -1,7 +1,9 @@
 <script lang="ts">
-    import UsersApi from "../../shared/api/UsersApi";
-    import AuthApi from "../../shared/api/AuthApi";
-    import {userStore} from "../../app/providers/StoreProvider/store";
+    import UsersApi from "@shared/api/UsersApi";
+    import AuthApi from "@shared/api/AuthApi";
+    import {userStore} from "@app/providers/StoreProvider/store";
+    import TitleUI from "@shared/ui/TitleUI/TitleUI.svelte";
+    import type { TSizeProp } from "@shared/ui";
 
     let username: string;
     let password: string;
@@ -31,10 +33,16 @@
             console.log(data);
         }
     }
+
+    /* ? Props */
+    /* По возможности типизируем пропсы */
+    const titleSizeProp: TSizeProp = "M";
 </script>
 
-<main class="wrapper">
-    <h4 class="title">Auth</h4>
+<main class="auth">
+    <TitleUI classExtendProp="auth__title-ui" levelProp={4} sizeProp={titleSizeProp}>
+        Auth
+    </TitleUI>
     <form on:submit|preventDefault method="post">
         <label>
             username
@@ -50,7 +58,24 @@
 </main>
 
 <style>
-    .wrapper {
-        flex-grow: 1;
+    /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
+    /* extend - взят из родительского компонента */
+    /* Порядок: @layer normalize, global, base, adds, mods, extend; */
+    @layer normalize, global, base, adds, mods, extend;
+
+    /* ? Component styles */
+    @layer base {
+        .auth {
+            flex-grow: 1;
+        }
+    }
+
+    /* ? Prop styles */
+    /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
+    @layer extend {
+        .auth :global(.auth__title-ui) {
+            /*color: red;*/
+            /*margin-bottom: 10px;*/
+        }
     }
 </style>
