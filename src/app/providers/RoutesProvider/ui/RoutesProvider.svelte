@@ -1,14 +1,16 @@
 <script lang="ts">
-    import {Route} from 'tinro';
     import {onMount} from "svelte";
+    import {Route} from 'tinro';
 
-    import RoomApi from "../../../../shared/api/RoomApi";
+
+    import RoomPage from "@pages/RoomPage/RoomPage.svelte";
+    import UsersPage from "@pages/UsersPage/UsersPage.svelte";
+    import TestPage from "@pages/TestPage/TestPage.svelte";
+    import HomePage from "@pages/HomePage";
+    import RoomApi from "@shared/api/RoomApi";
+    import { TitleUI } from "@shared/ui";
+    import type { TSizeProp } from "@shared/ui";
     import {userStore} from "../../StoreProvider/store";
-
-    import RoomPage from "../../../../pages/RoomPage/RoomPage.svelte";
-    import UsersPage from "../../../../pages/UsersPage/UsersPage.svelte";
-    import TestPage from "../../../../pages/TestPage/TestPage.svelte";
-    import HomePage from "../../../../pages/HomePage";
 
     let rooms: any[] = [];
     let name: string;
@@ -38,17 +40,35 @@
     }
 
     $: reactiveRooms = rooms;
+
+    /* ? Props */
+    /* По возможности типизируем пропсы */
+    const routerProviderSizePropOne: TSizeProp = "L";
+    const routerProviderSizePropTwo: TSizeProp = "M";
 </script>
 
-<main class="wrapper">
+<main class="router-provider">
     <div class="nav-container">
-        <h2>Navigation</h2>
+        <TitleUI
+                classExtendProp="router-provider__title-ui-one"
+                levelProp={2}
+                sizeProp={routerProviderSizePropOne}
+        >
+            Navigation
+        </TitleUI>
         <nav class="nav">
             <a href="/">Home</a>
 <!--            <a href="/test">Test Page</a>-->
             <a href="/users">Find Users Page</a>
 
             <h4>Rooms</h4>
+            <TitleUI
+                    classExtendProp="router-provider__title-ui-two"
+                    levelProp={4}
+                    sizeProp={routerProviderSizePropTwo}
+            >
+                Rooms
+            </TitleUI>
             {#if rooms}
                 {#each rooms.sort((a, b) => a.id > b.id ? 1 : -1) as room}
                     <a href={"/room/" + room.name}>{room.name}</a>
@@ -74,35 +94,55 @@
     </div>
 </main>
 
-<style>
-    .wrapper {
-        flex-grow: 1;
-        display: flex;
-        /*max-height: 1000px;*/
-    }
-    .nav-container {
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        padding: 20px;
+<style lang="scss">
+    /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
+    /* extend - взят из родительского компонента */
+    /* Порядок: @layer normalize, global, base, adds, mods, extend; */
+    @layer normalize, global, base, adds, mods, extend;
 
-        background: #58718c;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
+    /* ? Component styles */
+    @layer base {
+        .router-provider {
+            flex-grow: 1;
+            display: flex;
+        }
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            padding: 20px;
+
+            background: #58718c;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
+        .create-room {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            gap: 5px;
+        }
+        .error {
+            color: red;
+            pointer-events: none;
+        }
     }
-    .nav {
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-    }
-    .create-room {
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        gap: 5px;
-    }
-    .error {
-        color: red;
-        pointer-events: none;
+
+    /* ? Prop styles */
+    /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
+    @layer extend {
+        .router-provider {
+            :global(.router-provider__title-ui-one) {
+
+            }
+            :global(.router-provider__title-ui-two) {
+
+            }
+        }
     }
 </style>
