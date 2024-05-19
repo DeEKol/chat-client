@@ -8,6 +8,8 @@
     import ChatBottom from "@widgets/ChatBottom/ChatBottom.svelte";
     import MessageApi from "@shared/api/MessageApi";
     import RoomApi from "@shared/api/RoomApi";
+    import { TitleUI } from "@shared/ui";
+    import type { TSizeProp } from "@shared/ui";
 
     export let room: any;
 
@@ -57,32 +59,55 @@
     $: isUserInRoom = room.users.map((elem: any) => {
         return elem.id === $userStore.id;
     })
+
+    const roomPageSizeProp: TSizeProp = "L";
 </script>
 
-<div class="wrapper">
+<div class="room-page">
     {#if isUserInRoom.includes(true)}
         <ChatTop roomTitle={room.name} userId={userId} room={room} messagesArr={messageTextForBackArr} />
         <ChatWindow messagesArr={messageTextForBackArr} />
 
         <ChatBottom room={room} fileInput={fileInput} />
         {:else}
-        <h2 class="red">No room access!!!</h2>
+        <TitleUI
+                levelProp={2}
+                sizeProp={roomPageSizeProp}
+                classExtendProp="room-page__title-ui"
+        >
+            No room access!!!
+        </TitleUI>
     {/if}
 </div>
 
-<style>
-    .wrapper {
-        flex-grow: 1;
+<style lang="scss">
+    /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
+    /* extend - взят из родительского компонента */
+    /* Порядок: @layer normalize, global, base, adds, mods, extend; */
+    @layer normalize, global, base, adds, mods, extend;
 
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /*overflow: auto;*/
-        position: relative;
+    /* ? Component styles */
+    @layer base {
+        .room-page {
+            flex-grow: 1;
+
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /*overflow: auto;*/
+            position: relative;
+        }
+        .red {
+            color: red;
+        }
     }
 
-    .red {
-        color: red;
+    /* ? Prop styles */
+    /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
+    @layer extend {
+        .room-page :global(.room-page__title-ui) {
+            color: red;
+        }
     }
 </style>
