@@ -18,8 +18,8 @@
 <style lang="scss">
     /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
     /* extend - взят из родительского компонента */
-    /* Порядок: @layer global, base, adds, mods, extend; */
-    @layer global, base, adds, mods, extend;
+    /* Порядок: @layer normalize, global, base, adds, mods, extend; */
+    @layer normalize, global, base, adds, mods, extend;
 
     @layer base {
         :global(.title-ui) {

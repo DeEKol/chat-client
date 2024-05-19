@@ -1,4 +1,4 @@
-import "normalize.css";
+import "@app/styles/normalize.css";
 import './app/styles/app.css';
 import App from './app/App.svelte';
 
