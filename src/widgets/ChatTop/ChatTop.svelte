@@ -1,5 +1,7 @@
 <script lang="ts">
     import RoomApi from "@shared/api/RoomApi";
+    import { TitleUI } from "@shared/ui";
+    import type { TSizeProp } from "@shared/ui";
 
     export let roomTitle: string;
     export let userId: number;
@@ -23,10 +25,14 @@
             el?.scrollIntoView({behavior: "smooth", block: "center", inline: "start"})
         }, 10)
     }
+
+    const titleSizeProp: TSizeProp = "X";
 </script>
 
-<div class="wrapper">
-    <h2>Room: {roomTitle}</h2>
+<div class="chat-top">
+    <TitleUI levelProp={2} sizeProp={titleSizeProp} classExtendProp="chat-top__title-ui">
+        Room: {roomTitle}
+    </TitleUI>
     <div>
         Users in room:
         {#each room.users as user}
@@ -45,16 +51,33 @@
     </div>
 </div>
 
-<style>
-    .wrapper {
-        background: #58718c;
+<style lang="scss">
+    /* Базово слои должны соответствовать каскадности css (если поменялись местами оставлять TO:DO) */
+    /* extend - взят из родительского компонента */
+    /* Порядок: @layer normalize, global, base, adds, mods, extend; */
+    @layer normalize, global, base, adds, mods, extend;
 
-        padding: 7px;
-        border-top-right-radius: 10px;
+    /* ? Component styles */
+    @layer base {
+        .chat-top {
+            background: #58718c;
 
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        gap: 5px;
+            padding: 7px;
+            border-top-right-radius: 10px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            gap: 5px;
+        }
+    }
+
+    /* ? Prop styles */
+    /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
+    @layer extend {
+        .chat-top :global(.chat-top__title-ui) {
+            /*color: red;*/
+            //margin-bottom: 10px;
+        }
     }
 </style>
