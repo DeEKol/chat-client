@@ -35,8 +35,8 @@
     /* Порядок: @layer normalize, global, base, adds, mods, extend; */
     @layer normalize, global, base, adds, mods, extend;
 
+    /* ? Component styles */
     @layer base {
-        /* ? Component styles */
         .header {
             padding: 10px;
             margin-bottom: 10px;

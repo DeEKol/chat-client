@@ -1,5 +1,5 @@
-import "@app/styles/normalize.css";
-import './app/styles/app.css';
+import "@app/styles/normalize.scss";
+import '@app/styles/global.scss';
 import App from './app/App.svelte';
 
 const app = new App({
