@@ -1,8 +1,8 @@
 <script lang="ts">
+    import {userStore} from "@app/providers/StoreProvider/store";
     import UsersApi from "@shared/api/UsersApi";
     import AuthApi from "@shared/api/AuthApi";
-    import {userStore} from "@app/providers/StoreProvider/store";
-    import TitleUI from "@shared/ui/TitleUI/TitleUI.svelte";
+    import { TitleUI } from "@shared/ui";
     import type { TSizeProp } from "@shared/ui";
 
     let username: string;
