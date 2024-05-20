@@ -1,0 +1,10 @@
+/* ? Prop styles */
+/* Задавать css слой, чтоб использовать его внутри дочернего компонента */
+@layer extend {
+  .router-provider__title-ui-one {
+    color: #c5c3c3;
+  }
+  .router-provider__title-ui-two {
+    color: #c5c3c3;
+  }
+}

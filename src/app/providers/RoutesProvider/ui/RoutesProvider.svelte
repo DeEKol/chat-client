@@ -8,6 +8,8 @@
     import type { TSizeProp } from "@shared/ui";
     import {userStore} from "../../StoreProvider/store";
 
+    import styles from "./RouterProvider.module.scss";
+
     let rooms: any[] = [];
     let name: string;
     let isError: boolean = false;
@@ -46,7 +48,7 @@
 <main class="router-provider">
     <div class="nav-container">
         <TitleUI
-                classExtendProp="router-provider__title-ui-one"
+                classExtendProp={styles["router-provider__title-ui-one"]}
                 levelProp={2}
                 sizeProp={routerProviderSizePropOne}
         >
@@ -58,7 +60,7 @@
             <a href="/users">Find Users Page</a>
 
             <TitleUI
-                    classExtendProp="router-provider__title-ui-two"
+                    classExtendProp={styles["router-provider__title-ui-two"]}
                     levelProp={4}
                     sizeProp={routerProviderSizePropTwo}
             >
@@ -130,14 +132,14 @@
 
     /* ? Prop styles */
     /* Задавать css слой, чтоб использовать его внутри дочернего компонента */
-    @layer extend {
-        .router-provider {
-            :global(.router-provider__title-ui-one) {
-
-            }
-            :global(.router-provider__title-ui-two) {
-
-            }
-        }
-    }
+    //@layer extend {
+    //    .router-provider {
+    //        :global(.router-provider__title-ui-one) {
+    //
+    //        }
+    //        :global(.router-provider__title-ui-two) {
+    //
+    //        }
+    //    }
+    //}
 </style>
